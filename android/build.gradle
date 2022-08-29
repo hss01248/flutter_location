@@ -1,0 +1,46 @@
+//import android.widget.DatePicker
+
+group 'com.hss01248.flutter_location'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.2'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+}
+dependencies{
+    api 'com.github.hss01248.MyPermission:location:2.1.0'
+    api "com.blankj:utilcodex:1.30.0"
+
+    //flutter的相关依赖
+    //https://docs.flutter.dev/development/add-to-app/android/project-setup
+}
