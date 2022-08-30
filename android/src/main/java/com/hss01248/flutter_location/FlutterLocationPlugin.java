@@ -11,6 +11,8 @@ import com.hss01248.location.LocationSync;
 import com.hss01248.location.LocationUtil;
 import com.hss01248.location.MyLocationCallback;
 
+import java.util.Map;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -36,7 +38,8 @@ public class FlutterLocationPlugin implements FlutterPlugin, MethodCallHandler {
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
     } if (call.method.equals("getLocation")) {
-      //result.success("Android " + android.os.Build.VERSION.RELEASE);
+          Map<String,Object> arguments = (Map<String, Object>) call.arguments;
+          //result.success("Android " + android.os.Build.VERSION.RELEASE);
       LocationUtil.getLocation(Utils.getApp(),
               call.argument("isSilent")
               ,call.argument("timeout"),

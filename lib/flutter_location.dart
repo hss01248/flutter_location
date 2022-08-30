@@ -7,6 +7,7 @@ class FlutterLocation {
   }
 
   Future<String?> getLocation() {
+
     return FlutterLocationPlatform.instance.getLocation();
   }
 }
