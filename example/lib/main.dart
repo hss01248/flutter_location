@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await _flutterLocationPlugin.getLocation() ?? 'Unknown getLocation';
+          await _flutterLocationPlugin.getPlatformVersion() ?? 'Unknown getLocation';
     } on PlatformException {
       platformVersion = 'Failed to  getLocation.';
     }
@@ -55,9 +55,45 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children:<Widget>[
+              Text('Running on: $_platformVersion\n'),
+              MaterialButton(
+                  height: 40,
+                  elevation: 5,
+                  color: Colors.orangeAccent,
+                  textColor: Colors.white,
+                  splashColor: Colors.blue,
+                  padding: EdgeInsets.all(8),
+                  child: Text("点击定位"),
+                  onPressed: () => requestLocation()),
+                  //Navigator.of(context).pushNamed('AboutMePage'))
+            ]
+
+          )
         ),
       ),
     );
   }
+
+  requestLocation() async{
+    String platformVersion;
+    try {
+      platformVersion =
+          await _flutterLocationPlugin.getLocation() ?? 'Unknown getLocation';
+    } on PlatformException {
+      platformVersion = 'Failed to  getLocation.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _platformVersion = platformVersion;
+    });
+  }
+
+
 }
